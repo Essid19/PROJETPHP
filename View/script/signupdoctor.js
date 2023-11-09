@@ -1,5 +1,4 @@
-function signupDocteur(){
-  const firstNameInput = document.getElementById("firstNameInput");
+const firstNameInput = document.getElementById("firstNameInput");
 const errorFirstName = document.getElementById("error-message-firstname");
 const lastNameInput = document.getElementById("lastNameInput");
 const errorLastName = document.getElementById("error-message-lastname");
@@ -17,7 +16,7 @@ const errorPassword = document.getElementById("error-message-pwd");
 firstNameInput.addEventListener("keyup", validateFirstName);
 lastNameInput.addEventListener("keyup", validateLastName);
 emailInput.addEventListener("keyup", validateEmail);
-categorySelect.addEventListener("change", validateCategory);
+categorySelect.addEventListener("keyup", validateCategory);
 experienceTextarea.addEventListener("keyup", validateExperience);
 passwordInput.addEventListener("keyup", validatePassword);
 
@@ -56,10 +55,11 @@ function validateEmail() {
 }
 
 function validateCategory() {
-  if (categorySelect.value !== "") {
+  const category = categorySelect.value.trim();
+  if (/^[A-Za-z\s]*$/.test(category) && category.length > 3) {
     errorCategory.textContent = "";
   } else {
-    errorCategory.textContent = "Veuillez sélectionner une catégorie.";
+    errorCategory.textContent = "donner une specialite valide";
   }
   validateForm();
 }
@@ -105,6 +105,4 @@ function validateForm() {
   } else {
     signupButton.disabled = true; // Désactivation du bouton Signup
   }
-}
-
 }

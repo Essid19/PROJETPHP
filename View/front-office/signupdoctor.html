@@ -76,6 +76,7 @@
                   <nav class="navigation">
                     <ul class="nav menu">
                       <li><a href="index.html">Home </a></li>
+                      <li><a href="../back-office/index.html">ADMIN</a></li>
                       <li><a href="doctors.html">Doctors </a></li>
                       <li><a href="dashdoctor.html">Doctor </a></li>
                       <li><a href="dashpatient.html">user</a></li>
@@ -195,12 +196,8 @@
                         <div id="error-message-pwd" style="color: red"></div>
                       </div>
                     </div>
-                    <div class="col-lg-6">
-                      <select name="" id="select">
-                        <option value="">Category</option>
-                        <option value="aa">o1</option>
-                        <option value="bb">02</option>
-                      </select>
+                    <div class="col-lg-6 form-group">
+                      <input type="text" id="select" placeholder="Specialite" />
                       <div id="error-message-category" style="color: red"></div>
                     </div>
                     <div class="col-lg-12">
@@ -239,7 +236,7 @@
                       </div>
                     </div>
                     <div class="col-lg-3"></div>
-                    
+
                     <div class="col-lg-3"></div>
                     <div class="col-lg-6">
                       <div class="form-group login-btn">
@@ -247,7 +244,6 @@
                           class="btn"
                           type="submit"
                           id="signupButton"
-                          onclick="signupDocteur()"
                           disabled
                         >
                           Signup
@@ -501,6 +497,6 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
-    <script src="../signupdoctor.js"></script>
+    <script src="../script/signupdoctor.js"></script>
   </body>
 </html>
