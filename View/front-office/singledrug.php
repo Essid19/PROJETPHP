@@ -56,63 +56,8 @@
     <!-- Get Pro Button -->
 
     <!-- Header Area -->
-    <header class="header">
-      <!-- Topbar -->
-      <!-- End Topbar -->
-      <!-- Header Inner -->
-      <div class="header-inner">
-        <div class="container">
-          <div class="inner">
-            <div class="row">
-              <div class="col-lg-2 col-md-2 col-2">
-                <!-- Start Logo -->
-                <div class="logo">
-                  <a href="index.php"><img src="img/logo.png" alt="#" /></a>
-                </div>
-                <!-- End Logo -->
-                <!-- Mobile Nav -->
+    <?php include 'includes/navbar.php' ?>
 
-                <!-- End Mobile Nav -->
-              </div>
-              <div class="col-lg-8 col-md-10 col-8">
-                <!-- Main Menu -->
-                <div class="main-menu">
-                  <nav class="navigation">
-                    <ul class="nav menu">
-                      <li><a href="index.php">Home </a></li>
-                      <li><a href="../back-office/index.php">ADMIN</a></li>
-                      <li><a href="doctors.php">Doctors </a></li>
-                      <li><a href="dashdoctor.php">Doctor </a></li>
-                      <li><a href="dashpatient.php">user</a></li>
-                      <li><a href="dashpharmacie.php">pharmacy </a></li>
-                      <li><a href="medicament.php">drugs </a></li>
-                      <li>
-                        <a href="#"
-                          >Signup <i class="icofont-rounded-down"></i
-                        ></a>
-                        <ul class="dropdown">
-                          <li><a href="signupclient.php">Patient</a></li>
-                          <li><a href="signuppharmacie.php">Pharmacy</a></li>
-                          <li><a href="signupdoctor.php">Doctor</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="login.php">Login</a></li>
-                    </ul>
-                  </nav>
-                </div>
-                <!--/ End Main Menu -->
-              </div>
-              <div class="col-lg-2 col-12">
-                <div class="get-quote">
-                  <a href="contact.php" class="btn">Contact us</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/ End Header Inner -->
-    </header>
     <!-- End Header Area -->
 
     <!-- Breadcrumbs -->

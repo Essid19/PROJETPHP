@@ -1,7 +1,6 @@
 <?php
-include('C:\wamp64\www\projetphp_snm\config.php');
+include 'config.php' ;
 //include('C:/wamp64/www/projetphp_snm/Model/comment.php');
-
 //class comment
 class CmnC
 {
@@ -12,16 +11,15 @@ class CmnC
 
             $pdo = config::getConnexion();
             $query = $pdo->prepare(
-                'INSERT INTO commentaires(nom,prenom,email,texte_cmn) VALUES(:nom,:prenom,:email,:texte_cmn)'
+                'INSERT INTO commentaires(nom,texte_cmn) VALUES(:nom,:texte_cmn)'
 
             );
             $query->execute(
                 [
 
                     //'date_cmn' => $cmn->getdate(),
+                    //'id_cmn' => $cmn->id_cmn,
                     'nom' => $cmn->nom,
-                    'prenom' => $cmn->prenom,
-                    'email' => $cmn->email,
                     'texte_cmn' => $cmn->texte_cmn
 
                 ]
@@ -31,13 +29,14 @@ class CmnC
             die('Error: ' . $e->getMessage());
         }
     }
-    //method read comment from DB
-    public function readC()
+
+    //method read all from DB
+    public function readAll()
     {
         try {
             $pdo = config::getConnexion(); //obtenir la connexion pdo depuis la class config
             $query =  $pdo->prepare(
-                'SELECT nom,prenom,texte_cmn FROM commentaires'
+                'SELECT * FROM commentaires'
             );
             $query->execute();
             //echo "liste des commentaires récupérée avec succée!";
@@ -48,24 +47,20 @@ class CmnC
         }
     }
 
-
     //method update comment
-    public function updateCmn($cmn, $id)
+    public function updateCmn($cmn, $id_cmn)
     {
         try {
             $pdo = config::getConnexion();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $updateQuery = $pdo->prepare(
-                "UPDATE commentaires SET texte_cmn = :texte_cmn, date_cmn = :date_cmn, nom = :nom, prenom = :prenom , email= :email WHERE id = $id"
+                "UPDATE commentaires SET texte_cmn = :texte_cmn, nom = :nom WHERE id_cmn = $id_cmn"
             );
-            //$updateQuery->bindParam(':id_cmn', $id_cmn);
+
             $updateQuery->bindParam('texte_cmn', $cmn->texte_cmn, PDO::PARAM_STR);
-            //$updateQuery->bindParam(':date_cmn', $date_cmn, PDO::PARAM_STR);
             $updateQuery->bindParam('nom', $cmn->nom, PDO::PARAM_STR);
-            $updateQuery->bindParam('prenom', $cmn->prenom, PDO::PARAM_STR);
-            $updateQuery->bindParam('email', $cmn->email, PDO::PARAM_STR);
             $updateQuery->execute();
-            echo 'data updated!';
+           
         } catch (PDOException $e) {
             echo "update failed" . $e->getMessage();
         }
@@ -81,7 +76,7 @@ class CmnC
             $query->execute([
                 'id_cmn' => $id_cmn
             ]);
-            echo $query->rowCount() . "<br>" . "data deleted successfully ";
+            
         } catch (PDOException $e) {
             echo "oups update failed" . $e->getMessage();
         }

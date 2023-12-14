@@ -1,3 +1,15 @@
+<?php
+include '../../Controller/config.php';
+include '../../Controller/usersC.php';
+$controller = new usersC();
+if (isset($_POST['btn_search'])) {
+	$searchTerm = $_POST['search'];
+	$result = $controller->searchDoctor($searchTerm);
+} else {
+	$result = $controller->readdoctor();
+}
+
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -42,6 +54,77 @@
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="css/responsive.css">
+	<style>
+		.rbt-pagination {
+			margin: -8px;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		@media only screen and (max-width: 767px) {
+			.rbt-pagination {
+				margin: -4px;
+			}
+		}
+
+		.rbt-pagination li {
+			margin: 8px;
+		}
+
+		@media only screen and (max-width: 767px) {
+			.rbt-pagination li {
+				margin: 4px;
+			}
+		}
+
+		.rbt-pagination li a {
+			width: 45px;
+			height: 45px;
+			background: var(--color-white);
+			border-radius: 6px;
+			text-align: center;
+			color: RoyalBlue;
+			transition: 0.4s;
+			font-weight: 500;
+			box-shadow: var(--shadow-1);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		@media only screen and (max-width: 767px) {
+			.rbt-pagination li a {
+				width: 45px;
+				height: 45px;
+			}
+		}
+
+		.rbt-pagination li a i {
+			font-size: 22px;
+			font-weight: 500;
+		}
+
+		.rbt-pagination li.active a,
+		.rbt-pagination li:hover a {
+			background: RoyalBlue !important;
+			color: white;
+		}
+
+		a:hover,
+		a:focus,
+		a:active {
+			text-decoration: none;
+			outline: none;
+			color: var(--color-primary);
+		}
+
+		a:focus {
+			outline: none;
+		}
+	</style>
+
 
 </head>
 
@@ -51,61 +134,8 @@
 
 
 	<!-- Header Area -->
-	<header class="header">
-		<!-- Topbar -->
-		<!-- End Topbar -->
-		<!-- Header Inner -->
-		<div class="header-inner">
-			<div class="container">
-				<div class="inner">
-					<div class="row">
-						<div class="col-lg-2 col-md-2 col-2">
-							<!-- Start Logo -->
-							<div class="logo">
-								<a href="index.php"><img src="img/logo.png" alt="#" /></a>
-							</div>
-							<!-- End Logo -->
-							<!-- Mobile Nav -->
+	<?php include 'includes/navbar.php' ?>
 
-							<!-- End Mobile Nav -->
-						</div>
-						<div class="col-lg-8 col-md-10 col-8">
-							<!-- Main Menu -->
-							<div class="main-menu">
-								<nav class="navigation">
-									<ul class="nav menu">
-										<li><a href="index.php">Home </a></li>
-										<li><a href="../back-office/index.php">ADMIN</a></li>
-										<li><a href="doctors.php">Doctors </a></li>
-										<li><a href="dashdoctor.php">Doctor </a></li>
-										<li><a href="dashpatient.php">user</a></li>
-										<li><a href="dashpharmacie.php">pharmacy </a></li>
-										<li><a href="medicament.php">drugs </a></li>
-										<li>
-											<a href="#">Signup <i class="icofont-rounded-down"></i></a>
-											<ul class="dropdown">
-												<li><a href="signupclient.php">Patient</a></li>
-												<li><a href="signuppharmacie.php">Pharmacy</a></li>
-												<li><a href="signupdoctor.php">Doctor</a></li>
-											</ul>
-										</li>
-										<li><a href="login.php">Login</a></li>
-									</ul>
-								</nav>
-							</div>
-							<!--/ End Main Menu -->
-						</div>
-						<div class="col-lg-2 col-12">
-							<div class="get-quote">
-								<a href="contact.php" class="btn">Contact us</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--/ End Header Inner -->
-	</header>
 	<!-- End Header Area -->
 
 	<!-- Breadcrumbs -->
@@ -139,51 +169,99 @@
 					</div>
 				</div>
 			</div>
+			<div style="float: right;">
+
+
+				<form action="doctors.php" method="POST">
+					<input type="text" name="search" style="width: 400px; height: 35px; background-color: white;margin-top:23px; border: 1px solid black;  box-shadow: 6px 6px 5px #888;" placeholder="Doctor's name or speciality...">
+					<button type="submit" name="btn_search" style="width: 20px; height: 35px; background-color: RoyalBlue; margin-top:23px; border: 1px solid black; box-shadow: 6px 6px 5px #888; color:white;"><i class="fa fa-search"></i></button>
+				</form>
+			</div>
+			<br> <br> <br> <br>
 			<div class="row">
-				<div class="col-lg-4 col-md-6 col-12">
-					<!-- Single Blog -->
-					<a href="singledoctor.php?doctor_id=1">
-						<div class="single-news">
-							<div class="news-head">
-								<a href="singledoctor.php"><img src="img/blog1.jpg" alt="#"> </a>
-							</div>
-							<div class="news-body">
-								<div class="news-content">
-									<div class="date">Specialite</div>
-									<h2><a href="singledoctor.php">Name doctor</a></h2>
-									<p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
-								</div>
-							</div>
-						</div>
-					</a>
-					<!-- End Single Blog -->
-				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<!-- Single Blog -->
-					<a href="singledoctor.php">
-						<div class="single-news">
-							<div class="news-head">
-								<a href="singledoctor.php"><img src="img/blog2.jpg" alt="#"> </a>
-							</div>
-							<div class="news-body">
-								<div class="news-content">
-									<div class="date">Specialite</div>
-									<h2><a href="singledoctor.php">Name doctor</a></h2>
-									<p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
-								</div>
-							</div>
-						</div>
-					</a>
-					<!-- End Single Blog -->
-				</div>
+				<?php
+				$totalElements = count($result);
+				$elementsPerPage = 3;
+				$totalPages = ceil($totalElements / $elementsPerPage);
+				$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+				$startIndex = ($currentPage - 1) * $elementsPerPage;
+				$currentPageElements = array_slice($result, $startIndex, $elementsPerPage);
+
+				if (is_array($result) && !empty($result)) {
+					foreach ($currentPageElements as $row) {
+						echo "<div class='col-lg-4 col-md-6 col-12'>
+    <!-- Single Blog -->
+    <a href='singledoctor.php'>
+        <div class='single-news'>
+            <div class='news-head'>
+                <a href='singledoctor.php?id={$row['user_id']}'><img width='100' height='100' src='../../src/{$row['img']}' alt='#'></a>
+            </div>
+            <div class='news-body'>
+                <div class='news-content'>
+                    
+                    <h2><a href='singledoctor.php?id={$row['user_id']}'>Dr {$row['nom']} {$row['prenom']}</a></h2>
+                    
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+";
+					}
+				}
+				?>
+
+
+
+
 
 			</div>
 		</div>
+		<br /> <br>
+		<div class="row">
+			<div class="col-lg-12 mt--60">
+				<nav>
+					<ul class="rbt-pagination">
+						<?php if ($currentPage != 1) { ?>
+							<li><a href="?page=<?php echo $currentPage - 1 ?>" aria-label="Previous"><i class="fa fa-arrow-left fa-lg"></i></a></li>
+						<?php
+						}
+						?>
+						<?php if ($currentPage > 1) { ?>
+							<li><a href="?page=<?php echo $currentPage - 1 ?>"> <?php echo $currentPage - 1 ?> </a></li>
+
+						<?php
+						}
+						?>
+
+						<li class="active"><a href="#"><?php echo $currentPage; ?></a></li>
+
+						<?php if ($currentPage < $totalPages) { ?>
+							<li><a href="?page=<?php echo $currentPage + 1 ?>"><?php echo $currentPage + 1 ?></a></li>
+							<li><a href="?page=<?php echo $currentPage + 1 ?>" aria-label="Next">
+									<i class="fa fa-arrow-right fa-lg"></i>
+									<?php
+
+									?>
+									</i></a></li>
+						<?php } ?>
+					</ul>
+				</nav>
+			</div>
+
+
+
+
+
+		</div>
+
+
+
 	</section>
 	<!--/ End Single News -->
 
 	<!-- Footer Area -->
-	<footer id="footer" class="footer ">
+	<footer id="footer" class="footer">
 		<!-- Footer Top -->
 		<div class="footer-top">
 			<div class="container">
@@ -191,66 +269,103 @@
 					<div class="col-lg-3 col-md-6 col-12">
 						<div class="single-footer">
 							<h2>About Us</h2>
-							<p>Lorem ipsum dolor sit am consectetur adipisicing elit do eiusmod tempor incididunt ut labore dolore magna.</p>
+							<p>
+								Welcome to our  space, the online community dedicated to discussing health topics. Our mission is to provide an open and informative space for exchanging ideas, experiences, and advice on various health-related subjects.
+							</p>
+							<br>
 							<!-- Social -->
+							<div class="footer-section">
+								<h2>Useful Links</h2>
+								<p>Explore our resources and articles for in-depth information on various aspects of health. Check out our privacy policy and terms of use to learn more about our practices.</p>
+							</div>
+
 							<ul class="social">
-								<li><a href="#"><i class="icofont-facebook"></i></a></li>
-								<li><a href="#"><i class="icofont-google-plus"></i></a></li>
-								<li><a href="#"><i class="icofont-twitter"></i></a></li>
-								<li><a href="#"><i class="icofont-vimeo"></i></a></li>
-								<li><a href="#"><i class="icofont-pinterest"></i></a></li>
+								<li>
+									<a href="#"><i class="icofont-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icofont-google-plus"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icofont-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icofont-vimeo"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icofont-pinterest"></i></a>
+								</li>
 							</ul>
 							<!-- End Social -->
 						</div>
 					</div>
+
 					<div class="col-lg-3 col-md-6 col-12">
 						<div class="single-footer f-link">
+							<div class="footer-section">
+
+								<p>If you have questions, concerns, or suggestions, feel free to contact us. You can use our <a href="contact.php"> <span style="color:aqua">contact form</span></a> or find us on social media.</p>
+							</div>
+							<br>
 							<h2>Quick Links</h2>
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-12">
-									<ul>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a></li>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>About Us</a></li>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Services</a></li>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Our Cases</a></li>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Other Links</a></li>
-									</ul>
+
 								</div>
-								<div class="col-lg-6 col-md-6 col-12">
-									<ul>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Consuling</a></li>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Finance</a></li>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Testimonials</a></li>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>FAQ</a></li>
-										<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact Us</a></li>
-									</ul>
-								</div>
+								<ul>
+									<li>
+										<a href="index.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a>
+									</li>
+									<li>
+										<a href="doctors.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Doctors</a>
+									</li>
+									<li>
+										<a href="medicament.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Drugs</a>
+									</li>
+									<li>
+										<a href="showForum.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Our Forums</a>
+									</li>
+									<li>
+										<a href="Forum.php"><i class="fa fa-caret-right" aria-hidden="true"></i>Put Forum</a>
+									</li>
+								</ul>
 							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-12">
-						<div class="single-footer">
-							<h2>Open Hours</h2>
-							<p>Lorem ipsum dolor sit ame consectetur adipisicing elit do eiusmod tempor incididunt.</p>
-							<ul class="time-sidual">
-								<li class="day">Monday - Fridayp <span>8.00-20.00</span></li>
-								<li class="day">Saturday <span>9.00-18.30</span></li>
-								<li class="day">Monday - Thusday <span>9.00-15.00</span></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 col-12">
-						<div class="single-footer">
-							<h2>Newsletter</h2>
-							<p>subscribe to our newsletter to get allour news in your inbox.. Lorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
-							<form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-								<input name="email" placeholder="Email Address" class="common-input" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'" required="" type="email">
-								<button class="button"><i class="icofont icofont-paper-plane"></i></button>
-							</form>
+
 						</div>
 					</div>
 				</div>
+				<br>
+				<div class="col-lg-3 col-md-6 col-12">
+					<div class="single-footer">
+						<h2>Open Hours</h2>
+						<ul>
+							<li><strong>Monday:</strong> 9:00 AM - 5:00 PM</li>
+							<li><strong>Tuesday:</strong> 9:00 AM - 5:00 PM</li>
+							<li><strong>Wednesday:</strong> 9:00 AM - 5:00 PM</li>
+							<li><strong>Thursday:</strong> 9:00 AM - 5:00 PM</li>
+							<li><strong>Friday:</strong> 9:00 AM - 4:00 PM</li>
+							<li><strong>Saturday:</strong> Closed</li>
+							<li><strong>Sunday:</strong> Closed</li>
+						</ul>
+					</div>
+				</div>
+				<br>
+				<div class="col-lg-3 col-md-6 col-12">
+					<div class="single-footer">
+						<h2>Newsletter</h2>
+						<p>
+							subscribe to our newsletter to get all our news in your inbox..
+						</p>
+						<form action="commenter.php" method="get" target="_blank" class="newsletter-inner">
+							<input name="email" placeholder="Email Address" class="common-input" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'" required="" type="email" />
+							<button class="button">
+								<i class="icofont icofont-paper-plane"></i>
+							</button>
+						</form>
+					</div>
+				</div>
 			</div>
+		</div>
 		</div>
 		<!--/ End Footer Top -->
 		<!-- Copyright -->
@@ -259,7 +374,9 @@
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-12">
 						<div class="copyright-content">
-							<p>© Copyright 2018 | All Rights Reserved by <a href="https://www.wpthemesgrid.com" target="_blank">wpthemesgrid.com</a> </p>
+							<p>
+								© Copyright 2023 <span style="color:darkblue">[MediPlus] </span>| All Rights Reserved
+							</p>
 						</div>
 					</div>
 				</div>
@@ -268,7 +385,6 @@
 		<!--/ End Copyright -->
 	</footer>
 	<!--/ End Footer Area -->
-
 	<!-- jquery Min JS -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jquery Migrate JS -->

@@ -13,12 +13,15 @@ const errorFile = document.getElementById("error-message-file"); // Ajout du mes
 const signupButton = document.getElementById("signupButton");
 const passwordInput = document.getElementById("pwd");
 const errorPassword = document.getElementById("error-message-pwd");
+const adresseInput = document.getElementById("adresse");
+const erroradresse = document.getElementById("error-message-adresse");
 firstNameInput.addEventListener("keyup", validateFirstName);
 lastNameInput.addEventListener("keyup", validateLastName);
 emailInput.addEventListener("keyup", validateEmail);
 categorySelect.addEventListener("keyup", validateCategory);
 experienceTextarea.addEventListener("keyup", validateExperience);
 passwordInput.addEventListener("keyup", validatePassword);
+adresseInput.addEventListener("keyup", validateAdresse);
 
 function validateFirstName() {
   const firstName = firstNameInput.value.trim();
@@ -31,6 +34,8 @@ function validateFirstName() {
   }
   validateForm();
 }
+
+
 
 function validateLastName() {
   const lastName = lastNameInput.value.trim();
@@ -63,6 +68,16 @@ function validateCategory() {
   }
   validateForm();
 }
+function validateAdresse() {
+  const category = adresseInput.value.trim();
+  if (/^[A-Za-z\s]*$/.test(category) && category.length > 3) {
+    errorCategory.textContent = "";
+  } else {
+    errorCategory.textContent = "donner une specialite valide";
+  }
+  validateForm();
+}
+
 
 function validateExperience() {
   const experience = experienceTextarea.value.trim();
@@ -87,11 +102,12 @@ function validatePassword() {
 function validateForm() {
   const isFirstNameValid =
     firstNameInput.value.trim().length > 3 && !/\d/.test(firstNameInput.value);
-  const isLastNameValid = lastNameInput.value.trim().length > 5;
+  const isLastNameValid = lastNameInput.value.trim().length > 3;
   const isEmailValid = /^\S+@\S+\.\S+$/.test(emailInput.value.trim());
   const isCategoryValid = categorySelect.value !== "";
   const isExperienceValid = experienceTextarea.value.trim().length > 10;
   const isPasswordValid = passwordInput.value.trim().length > 5; // Nouvelle validation du mot de passe
+  const isAdresseValid = adresseInput.value !== "";
 
   if (
     isFirstNameValid &&
@@ -99,10 +115,11 @@ function validateForm() {
     isEmailValid && // Vérification du champ téléphone
     isCategoryValid &&
     isExperienceValid &&
-    isPasswordValid
+    isPasswordValid &&
+    isAdresseValid
   ) {
     signupButton.disabled = false; // Activation du bouton Signup
   } else {
-    signupButton.disabled = true; // Désactivation du bouton Signup
+    signupButton.enable = true; // Désactivation du bouton Signup
   }
 }

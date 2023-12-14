@@ -16,8 +16,7 @@ const errorPassword = document.getElementById("error-message-pwd");
 firstNameInput.addEventListener("keyup", validateFirstName);
 lastNameInput.addEventListener("keyup", validateLastName);
 emailInput.addEventListener("keyup", validateEmail);
-categorySelect.addEventListener("keyup", validateCategory);
-experienceTextarea.addEventListener("keyup", validateExperience);
+
 passwordInput.addEventListener("keyup", validatePassword);
 
 function validateFirstName() {
@@ -54,26 +53,6 @@ function validateEmail() {
   validateForm();
 }
 
-function validateCategory() {
-  const category = categorySelect.value.trim();
-  if (/^[A-Za-z\s]*$/.test(category) && category.length > 3) {
-    errorCategory.textContent = "";
-  } else {
-    errorCategory.textContent = "donner une specialite valide";
-  }
-  validateForm();
-}
-
-function validateExperience() {
-  const experience = experienceTextarea.value.trim();
-  if (experience.length > 10) {
-    errorExperience.textContent = "";
-  } else {
-    errorExperience.textContent =
-      "L'expérience doit contenir plus de 10 caractères.";
-  }
-  validateForm();
-}
 function validatePassword() {
   const password = passwordInput.value.trim();
   if (password.length > 5) {
@@ -89,18 +68,9 @@ function validateForm() {
     firstNameInput.value.trim().length > 3 && !/\d/.test(firstNameInput.value);
   const isLastNameValid = lastNameInput.value.trim().length > 5;
   const isEmailValid = /^\S+@\S+\.\S+$/.test(emailInput.value.trim());
-  const isCategoryValid = categorySelect.value !== "";
-  const isExperienceValid = experienceTextarea.value.trim().length > 10;
   const isPasswordValid = passwordInput.value.trim().length > 5; // Nouvelle validation du mot de passe
 
-  if (
-    isFirstNameValid &&
-    isLastNameValid &&
-    isEmailValid && // Vérification du champ téléphone
-    isCategoryValid &&
-    isExperienceValid &&
-    isPasswordValid
-  ) {
+  if (isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid) {
     signupButton.disabled = false; // Activation du bouton Signup
   } else {
     signupButton.disabled = true; // Désactivation du bouton Signup
